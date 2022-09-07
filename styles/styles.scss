@@ -1,0 +1,47 @@
+@import "slider";
+
+body {
+  margin: 0;
+  padding: 15px;
+  overflow: hidden;
+  background: grey;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      margin: 5px;
+    }
+    canvas {
+      box-shadow: 12px 0px 60px 3px black;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    #misc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 15px;
+      .button {
+        align-self: center;
+        width: 100px;
+        height: 40px;
+        border: 1px solid beige;
+        cursor: pointer;
+        color: white;
+        background: rgb(43, 43, 43);
+        font-weight: bold;
+      }
+      .color_picker {
+        align-self: center;
+        height: 50px;
+        border-radius: 10%;
+      }
+      .pen_weight {
+        align-self: center;
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ input[type=range] {
   background: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
   background-image: linear-gradient(#000000, #5e5e5e);
-  background-size: 50% 100%;
+  background-size: 1% 100%;
   background-repeat: no-repeat;
 }
 
@@ -80,35 +80,27 @@ body {
   overflow: hidden;
   background: grey;
 }
-
-.wrapper {
+body .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.wrapper canvas {
+body .wrapper h1 {
+  margin: 5px;
+}
+body .wrapper canvas {
   box-shadow: 12px 0px 60px 3px black;
   cursor: pointer;
+  margin-top: 15px;
 }
-.wrapper #misc {
+body .wrapper #misc {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
   margin-top: 15px;
 }
-.wrapper #misc .color_field {
-  height: 40px;
-  width: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  cursor: pointer;
-  display: inline-block;
-  box-sizing: border-box;
-  border-radius: 50%;
-  border: 1px solid beige;
-}
-.wrapper #misc .button {
+body .wrapper #misc .button {
   align-self: center;
   width: 100px;
   height: 40px;
@@ -118,11 +110,11 @@ body {
   background: rgb(43, 43, 43);
   font-weight: bold;
 }
-.wrapper #misc .color_picker {
+body .wrapper #misc .color_picker {
   align-self: center;
   height: 50px;
   border-radius: 10%;
 }
-.wrapper #misc .pen_weight {
+body .wrapper #misc .pen_weight {
   align-self: center;
 }/*# sourceMappingURL=styles.css.map */

@@ -1,4 +1,4 @@
-import { rangeInputs, handleInputChange } from "./_slider.js"; // importing input controls
+import { rangeInputs, handleInputChange } from "./script/_slider.js"; // importing input controls
 
 const undoButton = document.querySelector("#undoButton"); //
 const clearButton = document.querySelector("#clearButton"); // selecting buttons to add functionality to undo/clear buttons
@@ -8,9 +8,8 @@ clearButton.addEventListener("click", clearCanvas); // adding event listeners to
 
 const canvas = document.querySelector("#canvas");
 canvas.width = window.innerWidth - 150;
-canvas.height = window.innerHeight - 200;
+canvas.height = window.innerHeight - 250;
 
-window.changeColor = changeColor;
 window.pickedColor = pickedColor;
 window.inputValue = inputValue;
 
@@ -19,7 +18,7 @@ context.fillStyle = "white";
 context.fillRect(0, 0, canvas.width, canvas.height);
 
 let drawColor = "black";
-let drawWidth = "2";
+let drawWidth = "1";
 let isDrawing = false;
 let historyArray = [];
 let index = -1;
@@ -71,10 +70,6 @@ rangeInputs.forEach((input) => {
   input.addEventListener("input", handleInputChange);
 });
 
-function changeColor(element) {
-  drawColor = element.style.background;
-}
-
 function pickedColor(element) {
   drawColor = element.value;
 }
@@ -82,6 +77,7 @@ function pickedColor(element) {
 function inputValue(element) {
   drawWidth = element.value;
 }
+
 
 function clearCanvas() {
   context.fillStyle = "white";
@@ -95,9 +91,8 @@ function undoCanvas() {
   if ( index <= 0) {
     clearCanvas();
   } else {
-  index -= 1;
+  index = index - 1;
   historyArray.pop();
   context.putImageData(historyArray[index], 0, 0);
   }
 }
-

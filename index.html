@@ -4,17 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="script.js"></script>
+    <script type="module" defer src="script.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
   <body>
     <div class="wrapper">
-      <button id="create_grid">Start!</button>
-      <div id="grid_container">
-        
+      <h1>Drawing app!</h1>
+      <p>You can select colors and width of the pen, also there is an undo button, incase you mess up your drawing :)</p>
+      <canvas id="canvas"></canvas>
+      <div id="misc">
+        <button type="button" class="button" id="clearButton">Clear</button>
+        <button type="button" class="button" id="undoButton">Undo</button>
+
+        <div onClick="changeColor(this)" class="color_field" style="background: blue;" ></div>
+        <div onClick="changeColor(this)" class="color_field" style="background: green;" ></div>
+        <div onClick="changeColor(this)" class="color_field" style="background: red;" ></div>
+        <div onClick="changeColor(this)" class="color_field" style="background: black;" ></div>
+
+        <input oninput="pickedColor(this)" type="color" class="color_picker" autocomplete="off" value="#000000">
+        <input oninput="inputValue(this); rangevalue.value=value"type="range" min="1" max="100" value="50"class="pen_weight">
+        <output id="rangevalue">50</output>
       </div>
     </div>
-
   </body>
 </html>

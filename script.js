@@ -1,20 +1,103 @@
-const createButton = document.querySelector('#create_grid');
-const gridContainer = document.querySelector('#grid_container');
+import { rangeInputs, handleInputChange } from "./_slider.js"; // importing input controls
 
+const undoButton = document.querySelector("#undoButton"); //
+const clearButton = document.querySelector("#clearButton"); // selecting buttons to add functionality to undo/clear buttons
 
-createButton.addEventListener('click', createGrid);
+undoButton.addEventListener('click', undoCanvas); //
+clearButton.addEventListener("click", clearCanvas); // adding event listeners to undo/clear buttons
 
+const canvas = document.querySelector("#canvas");
+canvas.width = window.innerWidth - 150;
+canvas.height = window.innerHeight - 200;
 
-function createGrid() {
-    const size = parseInt(prompt('Size of grid'));
-  gridContainer.style.setProperty('--grid-rows', 4);
-  gridContainer.style.setProperty('--grid-cols', 4);
-  gridContainer.style.border = '1px solid black'
-  for (let i = 0; i < (size * size); i++) {
-    let cell = document.createElement("div");
-    gridContainer.appendChild(cell).className = "grid-item";
-  };
+window.changeColor = changeColor;
+window.pickedColor = pickedColor;
+window.inputValue = inputValue;
 
+let context = canvas.getContext("2d");
+context.fillStyle = "white";
+context.fillRect(0, 0, canvas.width, canvas.height);
 
+let drawColor = "black";
+let drawWidth = "2";
+let isDrawing = false;
+let historyArray = [];
+let index = -1;
 
-};
+canvas.addEventListener("mousedown", start, false);
+canvas.addEventListener("mouseup", stop, false);
+canvas.addEventListener("mousemove", draw, false);
+canvas.addEventListener("mouseout", stop, false);
+
+function start(event) {
+  isDrawing = true;
+  context.beginPath();
+  context.moveTo(
+    event.clientX - canvas.offsetLeft,
+    event.clientY - canvas.offsetTop
+  );
+  event.preventDefault();
+}
+
+function stop(event) {
+  if (isDrawing) {
+    context.stroke();
+    context.closePath();
+    isDrawing = false;
+  }
+  event.preventDefault();
+  if (event.type != "mouseout") {
+    historyArray.push(context.getImageData(0, 0, canvas.width, canvas.height));
+    index += 1;
+  }
+}
+
+function draw(event) {
+  if (isDrawing) {
+    context.lineTo(
+      event.clientX - canvas.offsetLeft,
+      event.clientY - canvas.offsetTop
+    );
+    context.strokeStyle = drawColor;
+    context.lineWidth = drawWidth;
+    context.lineCap = "round";
+    context.lineJoin = "round";
+    context.stroke();
+  }
+  event.preventDefault();
+}
+
+rangeInputs.forEach((input) => {
+  input.addEventListener("input", handleInputChange);
+});
+
+function changeColor(element) {
+  drawColor = element.style.background;
+}
+
+function pickedColor(element) {
+  drawColor = element.value;
+}
+
+function inputValue(element) {
+  drawWidth = element.value;
+}
+
+function clearCanvas() {
+  context.fillStyle = "white";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  historyArray = [];
+  index = -1;
+}
+
+function undoCanvas() {
+  if ( index <= 0) {
+    clearCanvas();
+  } else {
+  index -= 1;
+  historyArray.pop();
+  context.putImageData(historyArray[index], 0, 0);
+  }
+}
+

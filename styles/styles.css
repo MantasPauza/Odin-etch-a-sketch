@@ -88,7 +88,7 @@ body .wrapper {
 body .wrapper h1,
 body .wrapper p {
   margin: 5px;
-  color: rgb(32, 32, 32);
+  color: rgb(0, 0, 0);
 }
 body .wrapper p {
   font-weight: bold;

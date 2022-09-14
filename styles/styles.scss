@@ -10,15 +10,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    h1 , p{
+    h1,
+    p {
       margin: 5px;
-      color: rgb(38, 38, 38);
+      color: rgb(32, 32, 32);
     }
     p {
       font-weight: bold;
     }
     canvas {
-      box-shadow: 12px 0px 60px 3px black;
       cursor: pointer;
       margin-top: 25px;
     }
